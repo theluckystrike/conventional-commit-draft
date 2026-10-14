@@ -1,0 +1,83 @@
+[
+  {
+    "feature": "selection",
+    "caption": "Selected commit subjects in the active Markdown editor.",
+    "note": "Release subjects.md",
+    "eval": "(async () => { const p = app.plugins.plugins['conventional-commit-draft']; for (const m of [...p.modals]) m.close(); app.setting.close(); p.pro.signOut(); const e = app.workspace.activeEditor.editor; e.setSelection({line:0,ch:0}, e.offsetToPos(e.getValue().length)); return 'ok'; })()"
+  },
+  {
+    "feature": "grouping",
+    "caption": "Features, Fixes, and Documentation in the free draft preview.",
+    "note": "Release subjects.md",
+    "eval": "(async () => { const p = app.plugins.plugins['conventional-commit-draft']; for (const m of [...p.modals]) m.close(); app.setting.close(); p.pro.signOut(); const e = app.workspace.activeEditor.editor; e.setSelection({line:0,ch:0}, e.offsetToPos(e.getValue().length)); return 'ok'; })()",
+    "commands": [
+      "conventional-commit-draft:preview-draft"
+    ],
+    "after": "for (const m of [...app.plugins.plugins['conventional-commit-draft'].modals]) m.close(); 'ok'"
+  },
+  {
+    "feature": "breaking",
+    "caption": "The preview keeps a hash and scope and marks breaking subjects.",
+    "note": "Breaking subjects.md",
+    "eval": "(async () => { const p = app.plugins.plugins['conventional-commit-draft']; for (const m of [...p.modals]) m.close(); app.setting.close(); p.pro.signOut(); const e = app.workspace.activeEditor.editor; e.setSelection({line:0,ch:0}, e.offsetToPos(e.getValue().length)); return 'ok'; })()",
+    "commands": [
+      "conventional-commit-draft:preview-draft"
+    ],
+    "after": "for (const m of [...app.plugins.plugins['conventional-commit-draft'].modals]) m.close(); 'ok'"
+  },
+  {
+    "feature": "review",
+    "caption": "Build, Other, and Review keep the selected lines visible.",
+    "note": "Review subjects.md",
+    "eval": "(async () => { const p = app.plugins.plugins['conventional-commit-draft']; for (const m of [...p.modals]) m.close(); app.setting.close(); p.pro.signOut(); const e = app.workspace.activeEditor.editor; e.setSelection({line:0,ch:0}, e.offsetToPos(e.getValue().length)); return 'ok'; })()",
+    "commands": [
+      "conventional-commit-draft:preview-draft"
+    ],
+    "after": "for (const m of [...app.plugins.plugins['conventional-commit-draft'].modals]) m.close(); 'ok'"
+  },
+  {
+    "feature": "literal",
+    "caption": "Image syntax and HTML are escaped text in the preview.",
+    "note": "Literal subjects.md",
+    "eval": "(async () => { const p = app.plugins.plugins['conventional-commit-draft']; for (const m of [...p.modals]) m.close(); app.setting.close(); p.pro.signOut(); const e = app.workspace.activeEditor.editor; e.setSelection({line:0,ch:0}, e.offsetToPos(e.getValue().length)); return 'ok'; })()",
+    "commands": [
+      "conventional-commit-draft:preview-draft"
+    ],
+    "after": "for (const m of [...app.plugins.plugins['conventional-commit-draft'].modals]) m.close(); 'ok'"
+  },
+  {
+    "feature": "headings",
+    "caption": "Pro shows saved type names in the saved heading order.",
+    "note": "Atlas subjects.md",
+    "eval": "(async () => { const p = app.plugins.plugins['conventional-commit-draft']; for (const m of [...p.modals]) m.close(); app.setting.close(); p.pro.signOut(); const e = app.workspace.activeEditor.editor; e.setSelection({line:0,ch:0}, e.offsetToPos(e.getValue().length));p.pro.opts.http = async () => ({ status: 200, json: { data: { viewer: { login: 'demo-reader' }, user: { sponsorshipForViewerAsSponsor: { isActive: true, isOneTimePayment: false, tier: { name: '$5 a month', monthlyPriceInCents: 500 } } } } } }); app.secretStorage.setSecret('conventional-commit-draft-github-token', 'gho_' + '0'.repeat(36)); await p.pro.refreshNow(); await p.saveHeadings('fix=Repairs\\nfeat=New work\\ncustom=Team tools'); app.commands.executeCommandById('conventional-commit-draft:preview-draft'); return 'ok'; })()",
+    "after": "for (const m of [...app.plugins.plugins['conventional-commit-draft'].modals]) m.close(); 'ok'; app.plugins.plugins['conventional-commit-draft'].pro.signOut(); 'ok'"
+  },
+  {
+    "feature": "templates",
+    "caption": "Pro loads a named report template with a release title and project name.",
+    "note": "Atlas subjects.md",
+    "eval": "(async () => { const p = app.plugins.plugins['conventional-commit-draft']; for (const m of [...p.modals]) m.close(); app.setting.close(); p.pro.signOut(); const e = app.workspace.activeEditor.editor; e.setSelection({line:0,ch:0}, e.offsetToPos(e.getValue().length));p.pro.opts.http = async () => ({ status: 200, json: { data: { viewer: { login: 'demo-reader' }, user: { sponsorshipForViewerAsSponsor: { isActive: true, isOneTimePayment: false, tier: { name: '$5 a month', monthlyPriceInCents: 500 } } } } } }); app.secretStorage.setSecret('conventional-commit-draft-github-token', 'gho_' + '0'.repeat(36)); await p.pro.refreshNow(); await p.saveHeadings('fix=Repairs\\nfeat=New work\\ncustom=Team tools'); await p.saveTemplate({name:'Atlas weekly release',title:'Atlas version 2 draft',project:'Atlas',template:'# {{title}}\\n\\nProject: {{project}}\\n\\nTeam review before publication.\\n\\n{{sections}}'}); app.commands.executeCommandById('conventional-commit-draft:preview-draft'); const d=document.querySelector('.ccd-modal select'); d.value='Atlas weekly release'; d.dispatchEvent(new Event('change',{bubbles:true})); return 'ok'; })()",
+    "after": "for (const m of [...app.plugins.plugins['conventional-commit-draft'].modals]) m.close(); 'ok'; app.plugins.plugins['conventional-commit-draft'].pro.signOut(); 'ok'"
+  },
+  {
+    "feature": "workflow",
+    "caption": "Select subjects, preview the report, then save a new local draft.",
+    "frames": [
+      {
+        "note": "Release subjects.md",
+        "eval": "(async () => { const p = app.plugins.plugins['conventional-commit-draft']; for (const m of [...p.modals]) m.close(); app.setting.close(); p.pro.signOut(); const e = app.workspace.activeEditor.editor; e.setSelection({line:0,ch:0}, e.offsetToPos(e.getValue().length)); return 'ok'; })()",
+        "hold": 1400
+      },
+      {
+        "commands": [
+          "conventional-commit-draft:preview-draft"
+        ],
+        "hold": 1800
+      },
+      {
+        "eval": "(async () => { const p=app.plugins.plugins['conventional-commit-draft']; const m=[...p.modals][0]; const f=await p.saveDraft(m.commitSelection,'Atlas release draft','Atlas'); m.close(); await app.workspace.getLeaf(false).openFile(f); return 'ok'; })()",
+        "hold": 1800
+      }
+    ]
+  }
+]

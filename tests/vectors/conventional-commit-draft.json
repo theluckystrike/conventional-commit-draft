@@ -1,0 +1,282 @@
+{
+ "slug": "conventional-commit-draft",
+ "module": "conventional-commit-draft/src/draft",
+ "function": "draftFromText",
+ "cases": [
+  {
+   "name": "01 features and fixes",
+   "args": [
+    "feat: add search\nfix: repair links"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Features\n\n- add search\n\n## Fixes\n\n- repair links\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "02 hash scope and subject",
+   "args": [
+    "a1b2c3d feat(ui): add tabs"
+   ],
+   "expected": {
+    "commits": [
+     {
+      "raw": "a1b2c3d feat(ui): add tabs",
+      "hash": "a1b2c3d",
+      "type": "feat",
+      "scope": "ui",
+      "subject": "add tabs",
+      "breaking": false
+     }
+    ],
+    "review": [],
+    "count": 1
+   },
+   "function": "parseSelection"
+  },
+  {
+   "name": "03 breaking feature",
+   "args": [
+    "feat!: remove old API"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Features\n\n- **BREAKING** remove old API\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "04 breaking scoped fix",
+   "args": [
+    "fix(parser)!: reject empty input"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Fixes\n\n- **BREAKING** (parser) reject empty input\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "05 build and unknown type",
+   "args": [
+    "build: update bundler\ncustom: update tool"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Build\n\n- update bundler\n\n## Other \\(custom\\)\n\n- update tool\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "06 blanks ignored and review kept",
+   "args": [
+    "plain text\n\nfeat:"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Review\n\n- plain text\n- feat:\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "07 no selection",
+   "args": [
+    ""
+   ],
+   "expected": {
+    "error": "Select one or more commit subjects in the Markdown editor."
+   },
+   "function": "draftFromText"
+  },
+  {
+   "name": "08 image and HTML are literal",
+   "args": [
+    "feat: ![pic](asset.png) <b>text</b>"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Features\n\n- \\!\\[pic\\]\\(asset\\.png\\) &lt;b&gt;text&lt;/b&gt;\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "09 numbered existing path",
+   "args": [
+    "Release draft",
+    2
+   ],
+   "expected": "Release draft 2.md",
+   "function": "numberedPath"
+  },
+  {
+   "name": "10 size limit",
+   "args": [
+    "feat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\nfeat: x\n"
+   ],
+   "expected": {
+    "error": "Selection exceeds the 2,000 nonblank line limit. No draft was created."
+   },
+   "function": "draftFromText"
+  },
+  {
+   "name": "11 longest hash",
+   "args": [
+    "0123456789abcdef0123456789abcdef01234567 fix: x"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Fixes\n\n- x (0123456789abcdef0123456789abcdef01234567)\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "12 short hash stays in review",
+   "args": [
+    "abcdef feat: x"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Review\n\n- abcdef feat: x\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "13 long hash stays in review",
+   "args": [
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa feat: x"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Review\n\n- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa feat: x\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "14 uppercase type and hash",
+   "args": [
+    "ABC1234 FEAT: x"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Features\n\n- x (ABC1234)\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "15 CRLF and blank lines",
+   "args": [
+    "fix: one\r\n\r\nfeat: two\r\n"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Features\n\n- two\n\n## Fixes\n\n- one\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "16 duplicate subjects stay",
+   "args": [
+    "fix: x\nfix: x"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Fixes\n\n- x\n- x\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "17 empty scope stays in review",
+   "args": [
+    "feat(): x"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Review\n\n- feat\\(\\): x\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "18 empty subject stays in review",
+   "args": [
+    "feat:   "
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Review\n\n- feat:   \n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "19 missing colon space stays in review",
+   "args": [
+    "feat:x"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Review\n\n- feat:x\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "20 trailers stay in review",
+   "args": [
+    "BREAKING CHANGE: changed behavior"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Review\n\n- BREAKING CHANGE: changed behavior\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "21 entity cannot become HTML",
+   "args": [
+    "fix: &lt;img&gt;"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Fixes\n\n- &amp;lt;img&amp;gt;\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "22 wiki link is literal",
+   "args": [
+    "docs: [[Guide]] #topic"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Documentation\n\n- \\[\\[Guide\\]\\] \\#topic\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "23 template cannot expand subject slots",
+   "args": [
+    "feat: {{project}} $&"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Features\n\n- \\{\\{project\\}\\} \\$&amp;\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "24 punctuation escape",
+   "args": [
+    "fix: `x` *bold* _word_"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Fixes\n\n- \\`x\\` \\*bold\\* \\_word\\_\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "25 headings and template",
+   "args": [
+    "fix: x\nfeat: y",
+    {
+     "title": "Version 2",
+     "project": "Atlas",
+     "headings": "fix=Repairs\nfeat=New work",
+     "template": "# {{project}} {{title}}\n\n{{sections}}"
+    }
+   ],
+   "expected": "# Atlas Version 2\n\n## Repairs\n\n- x\n\n## New work\n\n- y\n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "26 missing sections rejected",
+   "args": [
+    "feat: x",
+    {
+     "title": "x",
+     "project": "p",
+     "headings": "feat=Features",
+     "template": "hidden"
+    }
+   ],
+   "expected": {
+    "error": "The template must have one {{sections}} slot and at most 10,000 characters."
+   },
+   "function": "draftFromText"
+  },
+  {
+   "name": "27 path strips traversal",
+   "args": [
+    "../../Unsafe: title",
+    1
+   ],
+   "expected": "Unsafe title.md",
+   "function": "numberedPath"
+  },
+  {
+   "name": "28 white space selection",
+   "args": [
+    " \n\t"
+   ],
+   "expected": {
+    "error": "Select one or more commit subjects in the Markdown editor."
+   },
+   "function": "draftFromText"
+  },
+  {
+   "name": "29 review preserves surrounding spaces",
+   "args": [
+    "  free text  "
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Review\n\n-   free text  \n",
+   "function": "draftFromText"
+  },
+  {
+   "name": "30 hashed breaking scope",
+   "args": [
+    "a1b2c3d fix(ui)!: x"
+   ],
+   "expected": "# Release draft\n\nProject: Project\n\n## Fixes\n\n- **BREAKING** (ui) x (a1b2c3d)\n",
+   "function": "draftFromText"
+  }
+ ]
+}

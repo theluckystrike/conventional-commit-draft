@@ -3,11 +3,17 @@ import { sponsorsSettingItems } from './license/github-obsidian';
 import { NEW_TEMPLATE } from './options';
 import { isPro, PRO_UI } from './pro';
 import type ConventionalCommitDraftPlugin from './main';
+import { helloSettingItems } from './hello/settings';
 export { DEFAULT_SETTINGS, normalizeSettings } from './options';
 
 export class ConventionalCommitDraftSettingTab extends PluginSettingTab {
 	constructor(app: ConstructorParameters<typeof PluginSettingTab>[0], readonly draftPlugin: ConventionalCommitDraftPlugin) { super(app, draftPlugin); }
 	getSettingDefinitions(): SettingDefinitionItem[] {
+		// The product rows, then the "More from NoteMods" card (packages/hello).
+		return [...this.productSettingDefinitions(), ...helloSettingItems()];
+	}
+
+	productSettingDefinitions(): SettingDefinitionItem[] {
 		return [
 			{ name: 'Free draft workflow', desc: 'Select commit subjects in a Markdown editor. Run Preview release draft from selection, check the text, then save a new note at the vault root.' },
 			...(this.draftPlugin.pro ? sponsorsSettingItems(this.draftPlugin.pro, PRO_UI) : []),

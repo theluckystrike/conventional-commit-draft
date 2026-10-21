@@ -6,6 +6,8 @@ import { DEFAULT_SETTINGS, normalizeSettings, type ConventionalCommitDraftSettin
 import { SPONSORS, bindPro, isPro, resetPro } from './pro';
 import { ConventionalCommitDraftSettingTab } from './settings';
 import { DraftModal } from './modal';
+import { setupHello } from './hello/index';
+import WHATS_NEW from './whats-new.json';
 
 export default class ConventionalCommitDraftPlugin extends Plugin {
 	settings: ConventionalCommitDraftSettings = { ...DEFAULT_SETTINGS, templates: [] };
@@ -14,6 +16,8 @@ export default class ConventionalCommitDraftPlugin extends Plugin {
 	readonly modals = new Set<DraftModal>();
 	private saving = false;
 	async onload(): Promise<void> {
+		// First: "What's new" reads its state before the settings load (packages/hello). It does not wait.
+		setupHello(this, WHATS_NEW);
 		await this.loadSettings();
 		const pro = createGitHubSponsors(this.app, this.manifest.id, SPONSORS, this);
 		pro.init();

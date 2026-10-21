@@ -56,7 +56,7 @@ A template must contain one sections slot. This requirement keeps the grouped su
 
 ## Install
 
-Use the community plugin directory when a release is listed. Search for Conventional Commit Draft, install it, and enable it. For a manual installation, copy main.js, manifest.json, and styles.css from a release into the conventional-commit-draft folder under your vault's .obsidian/plugins directory. Reload Obsidian and enable the plugin.
+Search for Conventional Commit Draft in the community plugin directory, install it, and enable it. For a manual installation, copy main.js, manifest.json, and styles.css from a release into the conventional-commit-draft folder under your vault's .obsidian/plugins directory. Reload Obsidian and enable the plugin.
 
 The minimum supported app version is 1.13.4. The plugin uses public editor and vault APIs without Node or Electron calls. Real iOS and Android device checks are still required; the desktop tests do not establish mobile compatibility.
 
@@ -73,6 +73,8 @@ Cancel closes the preview without a write. An empty selection gives a notice. A 
 <img src="https://raw.githubusercontent.com/theluckystrike/conventional-commit-draft/HEAD/docs/workflow.gif" alt="Select preview and save workflow" width="720">
 
 ## Settings
+
+After a minor or major update, this plugin opens one What's new tab in the background. The tab and settings card suggest other NoteMods plugins and Zovo Chat and link to notemods.com for feedback ([privacy](https://notemods.com/privacy/)). The tab sends no data. Turn the tab off in Settings.
 
 The free workflow needs no saved configuration. Optional Pro controls are in the plugin settings, below the GitHub account section. Heading lists accept 1 to 30 unique lowercase types with nonempty names. Template text has a 10,000-character limit. Saved names are limited to 80 characters; saved titles and project names are limited to 200 characters.
 

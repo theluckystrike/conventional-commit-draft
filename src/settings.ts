@@ -20,7 +20,8 @@ export class ConventionalCommitDraftSettingTab extends PluginSettingTab {
 			{ type: 'group', heading: 'Project type names and heading order (Pro)', items: [{ name: 'Type headings', desc: 'Use type=heading lines. Line order sets the report order. Types without a saved heading stay in Other.', render: (setting: Setting) => {
 				let value = this.draftPlugin.settings.headings;
 				setting.addTextArea((text) => text.setValue(value).setDisabled(!isPro()).onChange((text) => { value = text; }));
-				setting.addButton((button) => button.setButtonText('Save project headings').setDisabled(!isPro()).onClick(async () => {
+				// The save buttons stay enabled: a free user's click shows the Pro notice and saves nothing.
+				setting.addButton((button) => button.setButtonText('Save project headings').onClick(async () => {
 					try { if (await this.draftPlugin.saveHeadings(value)) new Notice('Project headings saved.'); }
 					catch (error) { new Notice(error instanceof Error ? error.message : String(error)); }
 				}));
@@ -31,7 +32,7 @@ export class ConventionalCommitDraftSettingTab extends PluginSettingTab {
 					const template = { ...NEW_TEMPLATE };
 					for (const [key, label] of [['name', 'Template name'], ['title', 'Saved release title'], ['project', 'Saved project name']] as const) setting.addText((text) => { text.setPlaceholder(label).setValue(template[key]).setDisabled(!isPro()).onChange((value) => { template[key] = value; }); text.inputEl.setAttribute('aria-label', label); });
 					setting.addTextArea((text) => { text.setValue(template.template).setDisabled(!isPro()).onChange((value) => { template.template = value; }); text.inputEl.setAttribute('aria-label', 'Report template text'); });
-					setting.addButton((button) => button.setButtonText('Save report template').setDisabled(!isPro()).onClick(async () => {
+					setting.addButton((button) => button.setButtonText('Save report template').onClick(async () => {
 						try { if (await this.draftPlugin.saveTemplate(template)) new Notice('Report template saved.'); }
 						catch (error) { new Notice(error instanceof Error ? error.message : String(error)); }
 					}));

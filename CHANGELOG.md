@@ -1,5 +1,11 @@
 # conventional-commit-draft
 
+## 1.1.1
+
+### Patch Changes
+
+- 8f9d9d4: Save project headings and Save report template now show how to get Pro, with a Sponsor on GitHub button. Nothing is saved without Pro.
+
 ## 1.1.0
 
 ### Minor Changes

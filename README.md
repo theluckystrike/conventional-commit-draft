@@ -42,7 +42,7 @@ Save new draft creates a note at the vault root. The release title supplies the 
 
 Save type names and their order in the plugin settings. Use one type=heading line per group. Put Fixes first, rename a heading, or give a project type its own section. Types absent from your saved list still get an Other label. Review remains a separate section after the parsed groups.
 
-These headings apply to reports while Pro is active. Signing out restores the free headings for previews and saves. Saved project choices remain in local plugin data for later use.
+These headings apply to reports while Pro is active. Signing out restores the free headings for previews and saves. Saved project choices remain in local plugin data.
 
 <img src="https://raw.githubusercontent.com/theluckystrike/conventional-commit-draft/HEAD/docs/headings.png" alt="Pro draft with saved custom headings" width="720">
 
@@ -76,7 +76,7 @@ Cancel closes the preview without a write. An empty selection gives a notice. A 
 
 After a minor or major update, this plugin opens one What's new tab in the background. The tab and settings card suggest other NoteMods plugins and Zovo Chat and link to notemods.com for feedback ([privacy](https://notemods.com/privacy/)). The tab sends no data. Turn the tab off in Settings.
 
-The free workflow needs no saved configuration. Optional Pro controls are in the plugin settings, below the GitHub account section. Heading lists accept 1 to 30 unique lowercase types with nonempty names. Template text has a 10,000-character limit. Saved names are limited to 80 characters; saved titles and project names are limited to 200 characters.
+The free workflow needs no saved configuration. Pro controls are in the plugin settings. Without Pro, their save buttons show a Sponsor on GitHub notice. Heading lists accept 1 to 30 unique lowercase types with nonempty names. Template text has a 10,000-character limit. Saved names are limited to 80 characters; saved titles and project names are limited to 200 characters.
 
 Use the sections, title, and project slots as shown below. Save the template, reopen the draft preview, and choose its name. Templates and headings are stored in plugin data in the vault. They are not sent to the sponsorship check.
 

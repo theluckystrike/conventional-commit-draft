@@ -3,7 +3,7 @@ import type { SponsorsManager } from './license/index';
 import { createGitHubSponsors } from './license/github-obsidian';
 import { DEFAULT_OPTIONS, buildDraft, headingMap, numberedPath, parseSelection, validateTemplate, type DraftOptions, type Selection } from './draft';
 import { DEFAULT_SETTINGS, normalizeSettings, type ConventionalCommitDraftSettings, type ReportTemplate } from './options';
-import { SPONSORS, bindPro, isPro, resetPro } from './pro';
+import { PRO_HEADINGS, PRO_TEMPLATES, SPONSORS, bindPro, isPro, resetPro, proNotice } from './pro';
 import { ConventionalCommitDraftSettingTab } from './settings';
 import { DraftModal } from './modal';
 import { setupHello } from './hello/index';
@@ -47,11 +47,11 @@ export default class ConventionalCommitDraftPlugin extends Plugin {
 		return { ...DEFAULT_OPTIONS, title, project, headings: isPro() ? this.settings.headings : DEFAULT_OPTIONS.headings, template: saved?.template ?? DEFAULT_OPTIONS.template };
 	}
 	async saveHeadings(text: string): Promise<boolean> {
-		if (!this.requirePro()) return false;
+		if (!this.requirePro(PRO_HEADINGS)) return false;
 		headingMap(text); this.settings.headings = text; await this.saveSettings(); return true;
 	}
 	async saveTemplate(template: ReportTemplate): Promise<boolean> {
-		if (!this.requirePro()) return false;
+		if (!this.requirePro(PRO_TEMPLATES)) return false;
 		validateTemplate(template.template);
 		if (!template.name.trim()) throw new Error('Enter a template name.');
 		const normalized = normalizeSettings({ templates: [template] }).templates[0];
@@ -62,9 +62,9 @@ export default class ConventionalCommitDraftPlugin extends Plugin {
 		else this.settings.templates.push(normalized);
 		await this.saveSettings(); this.settingTab?.update(); return true;
 	}
-	private requirePro(): boolean {
+	private requirePro(lead: string): boolean {
 		if (isPro()) return true;
-		new Notice('This is a pro feature. Sponsor on GitHub, then sign in from the plugin settings.'); return false;
+		proNotice(lead); return false;
 	}
 	async saveDraft(selection: Selection, title: string, project: string, templateName = ''): Promise<TFile | null> {
 		if (this.saving) return null;

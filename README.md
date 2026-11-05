@@ -94,11 +94,13 @@ The plugin reads selected editor text and writes a Markdown note. It does not ru
 
 A line enters Review when it does not match the supported form: type, optional scope, optional breaking mark, colon, whitespace, and subject. An optional hexadecimal hash can precede it. Commit bodies and trailers are outside this parser's scope.
 
-Real mobile devices, Windows, and Linux app sessions were not tested in this build. A live GitHub payment and a live OAuth sign-in were not tested. Sponsors tests use a mock answer. The Node 24 and npm 11 release environment was not tested locally. Custom themes, other plugins, and sync conflicts require separate checks.
+Real mobile devices, Windows, and Linux app sessions were not tested. A live GitHub payment and a live OAuth sign-in were not tested. Sponsors tests use a mock answer. The Node 24 and npm 11 release environment was not tested locally. Custom themes, other plugins, and sync conflicts require separate checks.
 
 ## Payment, account and network
 
 The core features are free. Pro features need a GitHub Sponsors sponsorship of theluckystrike: $5 a month or more, or $15 once. A total payment of $15 meets the payment requirement for Pro without further payment. Sign-in and the checks below still apply. Your notes stay readable and editable with or without Pro.
+
+[One payment turns on Pro in every NoteMods plugin](https://notemods.com/pro/).
 
 GitHub handles the payment. Sponsor at https://github.com/sponsors/theluckystrike?frequency=one-time&metadata_source=conventional-commit-draft. You need no account for the free features. Pro needs the GitHub account that sponsors.
 
@@ -112,4 +114,4 @@ After a successful check, Pro can work offline for up to 14 days. Sign out or a 
 
 Report a problem in the plugin repository with the app version, plugin version, and a short sample selection. Remove private project text before you share it. Include the expected heading and the actual output for parser issues. For a save error, include the notice text and whether a report with that title exists.
 
-The source code uses the MIT license. The publisher is theluckystrike. This plugin is an independent community tool.
+The source code uses the MIT license. The publisher is theluckystrike.

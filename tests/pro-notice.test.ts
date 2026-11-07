@@ -8,7 +8,7 @@ import manifest from '../manifest.json';
 
 // A free user can select Save project headings and Save report template. The click shows the shared Pro notice
 // with a Sponsor button. Nothing is saved, and the Pro fields keep the saved value. A Pro user saves, as before.
-const PITCH = 'Sponsor on GitHub, then sign in from the plugin settings.';
+const PITCH = 'One payment turns on Pro in every NoteMods plugin. Sponsor on GitHub, then sign in from the plugin settings.';
 
 function fakePro(pro: boolean): SponsorsManager {
 	return {
